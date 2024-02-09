@@ -98,6 +98,7 @@ const initialFrame: Frame = {
   version: "vNext",
   buttons: [
     {
+      action: "post",
       label: "Random image",
     },
   ],
@@ -123,7 +124,7 @@ export const metadata: Metadata = {
 // handle frame actions
 // ./app/frames/route.ts
 
-import { getFrameHtml, validateFrameMessage } from "frames.js";
+import { getFrameHtml, validateFrameMessage, Frame } from "frames.js";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -139,11 +140,12 @@ export async function POST(request: NextRequest) {
   const imageUrlBase = `https://picsum.photos/seed/${randomInt}`;
 
   // Use the frame message to build the frame
-  const frame = {
+  const frame: Frame = {
     version: "vNext",
     image: `${imageUrlBase}/1146/600`,
     buttons: [
       {
+        action: "post",
         label: `Next (pressed by ${message.data.fid})`,
       },
     ],
